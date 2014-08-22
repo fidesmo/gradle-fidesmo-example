@@ -40,3 +40,6 @@ javacard {
     }
 }        
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}
