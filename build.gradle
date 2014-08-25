@@ -8,7 +8,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.fidesmo:gradle-fidesmo:0.1.0'
+        classpath 'com.fidesmo:gradle-fidesmo:0.1.1'
     }
 }
 
