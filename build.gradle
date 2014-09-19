@@ -1,6 +1,5 @@
 apply plugin: 'fidesmo'
 
-// include bintray for format-plugin
 buildscript {
     repositories {
         mavenCentral()
@@ -8,7 +7,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.fidesmo:gradle-fidesmo:0.1.3'
+        classpath 'com.fidesmo:gradle-fidesmo:0.1.4'
     }
 }
 
@@ -19,6 +18,10 @@ repositories {
 dependencies {
     testCompile 'junit:junit:4.11'
     testCompile 'com.licel:jcardsim:2.2.2'
+}
+
+fidesmo {
+    appId = 'e26b8f12'
 }
 
 javacard {
