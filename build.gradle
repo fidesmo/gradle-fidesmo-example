@@ -18,6 +18,14 @@ repositories {
 dependencies {
     testCompile 'junit:junit:4.11'
     testCompile 'com.licel:jcardsim:2.2.2'
+
+    /* add global platform classes and exps from environment variable
+     * GP_HOME, it should be the absolute path to the dir named
+     * "GP_exportA00000015100" extracted from the "Java Card Export
+     * File for GlobalPlatform Card Specification v2.1.1 – v1.0"
+     */
+    compile files(System.env.GP_HOME)
+    javacardExport files(System.env.GP_HOME)
 }
 
 javacard {

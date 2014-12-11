@@ -1,5 +1,6 @@
 package com.fidesmo.javacard.example;
 
+import org.globalplatform.GPSystem;
 import javacard.framework.*;
 
 public class ExampleCardlet extends Applet
@@ -46,6 +47,8 @@ public class ExampleCardlet extends Applet
                 echoOffset += bytesRead;
                 bytesRead = apdu.receiveBytes(ISO7816.OFFSET_CDATA);
             }
+
+            GPSystem.getCardContentState();
 
             apdu.setOutgoing();
             apdu.setOutgoingLength( (short) (echoOffset + 5) );
