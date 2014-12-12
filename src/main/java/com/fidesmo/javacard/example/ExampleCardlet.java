@@ -6,6 +6,8 @@ public class ExampleCardlet extends Applet
 {
     private byte[] received;
     private static final short MAX_LENGTH = 256;
+    private static final byte[] helloFidesmo = {(byte)'H',(byte)'e',(byte)'l',(byte)'l',(byte)'o',(byte)' ',(byte)'F',(byte)'i',(byte)'d',(byte)'e',(byte)'s',(byte)'m',(byte)'o',(byte)'!'};
+ 
 
     protected ExampleCardlet(){
         received = new byte[MAX_LENGTH];
@@ -23,35 +25,17 @@ public class ExampleCardlet extends Applet
     }
 
     /**
-     * Processes an incoming APDU.
+     * Processes an incoming APDU. Will always respond with the helloFidesmo string,
+     * regardless of what is received.
      * @see APDU
      * @param apdu the incoming APDU
      * @exception ISOException with the response bytes per ISO 7816-4
      */
     public void process(APDU apdu){
-        byte buffer[] = apdu.getBuffer();
-        short bytesRead = apdu.setIncomingAndReceive();
-
-        if (buffer[ISO7816.OFFSET_CLA] == ISO7816.CLA_ISO7816
-            && buffer[ISO7816.OFFSET_INS] == ISO7816.INS_SELECT) {
-
-            apdu.setOutgoing();
-            apdu.setOutgoingLength( (short) 0);
-
-        } else {
-            short echoOffset = (short)0;
-
-            while ( bytesRead > 0 ) {
-                Util.arrayCopyNonAtomic(buffer, ISO7816.OFFSET_CDATA, received, echoOffset, bytesRead);
-                echoOffset += bytesRead;
-                bytesRead = apdu.receiveBytes(ISO7816.OFFSET_CDATA);
-            }
-
-            apdu.setOutgoing();
-            apdu.setOutgoingLength( (short) (echoOffset + 5) );
-
-            apdu.sendBytes( (short)0, (short) 5);
-            apdu.sendBytesLong( received, (short) 0, echoOffset );
-        }
+        byte buffer[] = apdu.getBuffer();        
+        short length = (short) helloFidesmo.length;
+                
+        Util.arrayCopyNonAtomic(helloFidesmo, (short)0, buffer, (short)0, (short)length);
+        apdu.setOutgoingAndSend((short)0, length);               
     }
 }
