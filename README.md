@@ -34,26 +34,20 @@ Example usage
 
 Running the cardlet
 -------------------
+Start up the APDU console built in to the SDK using the following
+command (`--no-daemon` is required for it to work properly):
 
-The example cardlet provided in this projects accepts select and will after selection accept case 4
-APDUs and echo the entire APDU (with header and data) back plus the success status word
-(0x9000). As an example the following script was with [gpshell](http://sourceforge.net/projects/globalplatform/files):
+    ./gradlew --no-daemon -q console
 
-    enable_trace
-    mode_211
-    establish_context
-    card_connect
-    select -AID a00000061700e26b8f120101
-    send_apdu -APDU 80ca000004deadbeef00
-    card_disconnect
-    release_context
+Then first select the application using the SELECT
+(00A404000CA00000061700E26B8F120101) command and then send a command
+with a test payload (80CA000004DEADBEEF00). Your session should look
+like this:
 
-Running this resulted in the following trace:
-
-    Command --> 00A404000CA00000061700E26B8F120101
-    Wrapped command --> 00A404000CA00000061700E26B8F120101
-    Response <-- 9000
-    Command --> 80CA000004DEADBEEF00
-    Wrapped command --> 80CA000004DEADBEEF00
-    Response <-- 80CA000004DEADBEEF9000
-    send_APDU() returns 0x80209000 (9000: Success. No error.)
+    > send 00A404000CA00000061700E26B8F120101
+    ==> ApduCommand(00A404000CA00000061700E26B8F120101)
+    <== ApduResponse(48656C6C6F2046696465736D6F219000)
+    > send 80ca000004deadbeef00
+    ==> ApduCommand(80CA000004DEADBEEF00)
+    <== ApduResponse(48656C6C6F2046696465736D6F219000)
+    >
