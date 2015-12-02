@@ -32,6 +32,8 @@ Example usage
 - `./gradlew deleteFromLocalCard` - Remove application from a Fidesmo card connected to a local reader.
 - `./gradlew uploadExecutableLoadFile` - Upload the application to the Fidesmo Service. You can verify that the application has been correctly uploaded using the executableLoadFiles operation of the [Fidesmo API](https://developer.fidesmo.com/api)
 
+Instead of a card reader you can now also use your [NFC enabled Android phone](https://github.com/fidesmo/gradle-fidesmo#android-phone-as-card-reader) to communicate with the card.
+
 Running the cardlet
 -------------------
 Start up the APDU console built in to the SDK using the following
