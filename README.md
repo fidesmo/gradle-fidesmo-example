@@ -22,7 +22,7 @@ portal](https://developer.fidesmo.com/).
     echo 'fidesmoAppId: yourAppID' >> $HOME/.gradle/gradle.properties
     echo 'fidesmoAppKey: yourAppKey' >> $HOME/.gradle/gradle.properties
 
-The fidesmo plugin installs per default to the aid a00000061700<fidesmoAppKey>0101.
+The fidesmo plugin installs per default to the aid a00000061700[fidesmoAppID]0101.
 
 Example usage
 -------------
